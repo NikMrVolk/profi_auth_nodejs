@@ -1,11 +1,17 @@
 const express = require('express')
-const PORT = process.env.PORT || 5000
+const mongoose = require('mongoose')
+const PORT = process.env.PORT || 5005
 
 const app = express()
 
-const start = () => {
+app.use(express.json())
+
+const start = async () => {
 	try {
-		app.listen(PORT, console.log(`server started on port ${PORT}`))
+		await mongoose.connect(
+			`mongodb+srv://querty:querty123@cluster0.2v5dyx0.mongodb.net/?retryWrites=true&w=majority`
+		)
+		app.listen(PORT, () => console.log(`server started on port ${PORT}`))
 	} catch (e) {
 		console.log(e)
 	}
